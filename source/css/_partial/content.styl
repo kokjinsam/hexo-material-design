@@ -1,0 +1,168 @@
+.md-post--expand > .md-post__details > .md-post__content,
+.md-post > .md-post__details > .md-post__excerpt,
+.md-board > .md-tile > .md-tile__excerpt
+  h1
+    margin-top: spacing*5
+    margin-bottom: spacing
+    font-weight: 600
+    font-size: 26px
+    line-height: 32px
+	h2 
+    margin-top: spacing*5
+		margin-bottom: spacing
+		font-weight: 600
+		font-size: 24px
+		line-height: 30px
+	
+	h3
+		margin-top: spacing*4
+		margin-bottom: spacing
+		font-weight: 600
+		font-size: 22px
+		line-height: 28px
+	
+	h4
+		margin-top: spacing*3
+		margin-bottom: spacing
+		font-weight: 600
+		font-size: 20px
+		line-height: 26px
+		
+	h5
+		margin-top: spacing*3
+		margin-bottom: spacing
+		font-weight: 600
+		font-size: 18px
+		line-height: 24px
+		
+	h6
+		margin-top: spacing*3
+		margin-bottom: spacing
+		font-weight: 600
+		font-size: 16px
+		line-height: 22px
+	
+	p
+		margin-top: spacing
+		margin-bottom: spacing
+		a
+			text-decoration: none
+			color: light-primary-color
+		em
+			font-style: italic
+		strong
+			font-weight: bold
+		del
+			color: secondary-text
+		code
+			background-color: #eeeeee
+			border-radius: 3px
+			padding: (spacing/2) spacing
+			font-family: "Courier New",monospace
+			font-size: 16px
+			color: secondary-text
+			
+	ul,
+	ol
+		margin: spacing*2 0 spacing*2 spacing*3 
+		
+		li
+			a
+				text-decoration: none
+				color: light-primary-color
+		
+		@media	(min-width: breakpoint-portrait-phablet)
+			margin: spacing*2 0 spacing*2 spacing*5 
+	
+	ul
+		list-style-type: disc
+		
+	ol
+		list-style-type: decimal
+	
+	blockquote
+		margin: spacing*2 0 spacing*2 spacing
+		border-left: 4px divider-color solid
+		padding: spacing
+		
+		p
+			cite
+				color: secondary-text
+				font-style: italic
+				
+		@media	(min-width: breakpoint-portrait-phablet)
+			margin: spacing*2 0 spacing*2 spacing*3
+	
+	figure
+		background-color: #eeeeee
+		border-radius: 3px
+		margin: spacing 0
+		padding: spacing
+		box-sizing: border-box
+		overflow-y: auto
+		
+		table
+			tbody
+				tr
+					td
+						pre
+							> .line
+								margin-left: 4px
+								margin-right: spacing*2
+								color: secondary-text
+	
+	> .bash
+		table
+			tbody
+				tr
+					td
+						pre
+							> .line
+								> .string
+									color: #FF8F00
+									
+	> .javascript
+		table
+			tbody
+				tr
+					td
+						pre
+							> .line
+								> .string
+									color: #FF8F00
+									
+								> .keyword,
+								> .function,
+								> .literal,
+								> .number
+									color: #00007F
+	> .html
+		table
+			tbody
+				tr
+					td
+						pre
+							> .line
+								> .string
+									color: #FF8F00
+									
+								> .keyword,
+								> .function,
+								> .literal,
+								> .number
+									color: #00007F
+									
+								> .tag
+									> .title
+										color: #0000DA
+									> .attribute
+										color: #00007F
+									> .value 
+										color: #FF8F00
+	
+	> .markdown
+		
+.md-post > .md-post__details > .md-post__excerpt
+	figure
+		display: none  // temporary fix
+		overflow: hidden

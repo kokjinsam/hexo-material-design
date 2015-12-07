@@ -1,0 +1,117 @@
+<% 
+	/*
+	*	to prevent articles run wild
+	*/
+	var makeCards = theme.makeCards ? 'md-board display-animation':'';
+	
+	/**
+	*	@private
+	*	@function
+	* @param {int} current size of the row
+	* @return {int} returns 1 (small card) or 2 (large card)
+	*/
+	function calculateCardSize(currentSize) {
+		var largeOrSmall = Math.floor((Math.random() * 2) + 1),
+				previous = currentSize, 
+				current = currentSize; 
+				
+		current += largeOrSmall; 
+		
+		if(current > 4) {
+			if(previous == 3) {
+				largeOrSmall = 1; 
+				current = 4;
+			}
+			
+			//reset current
+			if(previous >= 4) {
+				current = largeOrSmall;
+			}
+		}
+		
+		return {
+			largeOrSmall: largeOrSmall,
+			currentSize: current
+		}
+	}
+	
+	/* not group by year */
+	if (!theme.groupByYear){
+		var postCount = 0;
+%>
+		<section class="md-posts__wrapper">	
+			<div class="<%= makeCards %>">
+
+<%			var currentSize = 0;
+				page.posts.each(function(post){
+					var largeOrSmall = post.cardSize || 1;
+					
+					if(theme.randomCardSize) {
+						largeOrSmall = calculateCardSize(currentSize);
+						currentSize = largeOrSmall.currentSize;
+					}
+					
+%>				<%- partial('article', {post: post, makeCard: theme.makeCards, cardSize: largeOrSmall}) %>	
+<% 			});
+%>		</div>
+		</section>
+<%
+  } else {  
+		var last, postCount = 0, currentSize = 0; 
+
+		page.posts.each(function(post){			
+			var year = post.date.year(),
+					largeOrSmall = post.cardSize || 1,
+					cardColor = 6;
+			
+			if(theme.randomCardSize) {
+				var calculatedSize = calculateCardSize(currentSize);
+				largeOrSmall = calculatedSize.largeOrSmall;
+				currentSize = calculatedSize.currentSize;
+			}
+			
+			if(post.cardColor) {
+				cardColor = post.cardColor;
+			}else if(theme.randomCardColor) {
+				cardColor = Math.floor((Math.random() * 16)+1);
+			}
+			/* 
+			*	if last post year is not current post year 
+			*	create new section
+			*/ 
+			if (last != year){
+				
+				/* 
+				*	terminate previous md-posts__wrapper 
+				*	terminate previous md-posts
+				*/
+				if (last != null){ 
+%>				</div></section>
+<%			}
+
+				last = year; 
+%>
+				<section class="md-posts__wrapper">
+					<h1 class="md-posts__year">
+						<a href="<%- url_for('archives/' + year) %>"><i class="icon fa fa-calendar-o"></i><%= year %></a>
+					</h1>
+					<div class="<%= makeCards %>">
+<%		}
+%>
+			<%- partial('article', {post: post, makeCard: theme.makeCards, cardSize: largeOrSmall, cardColor: cardColor}) %>
+<%
+		}); 
+		
+		if (page.posts.length){ 
+%>		</div></section>
+<% 	} 
+	}
+	
+	/* paginator */
+	if(page.total > 1) { 
+%>	<nav class="md-posts__paginator">
+			<%- paginator({prev_text: '&laquo;', next_text: '&raquo;'}) %>
+		</nav>
+<%
+	}  
+%>

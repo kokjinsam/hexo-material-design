@@ -1,0 +1,35 @@
+# Material Design Configuration
+
+# Header
+isFull: false
+background:  # background image for header
+logo:  # logo for header
+navigations: 
+  Home: /
+  About: /about
+  
+
+# Main
+groupByYear: true		# Article list grouped by year
+thumbnail: true		#thumbnail for cover
+makeCards: true		#set style for articles. List articles in card-form or list-form
+randomCardSize: true  #randomly generate small and large cards
+randomCardColor: true  #randomly generate color for cards
+
+# Sidebar 
+# Configurations for sidebar are ot available yet
+social_media:
+  twitter:
+  facebook:
+  google-plus:
+  github:
+  weibo:
+  rss:
+widgets:
+- recent_posts
+- category
+- archive
+- tag
+- tagcloud
+- links
+

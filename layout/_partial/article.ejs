@@ -1,0 +1,135 @@
+ <% 	
+	if(makeCard) {
+		if(cardSize) {
+			var largeOrSmall = cardSize == 2 ? 'md-tile--large' : 'md-tile--small';
+		}
+		
+		// 17 colors
+		var colors = [
+			'red',
+			'pink',
+			'purple',
+			'deep-purple',
+			'indigo',
+			'blue',
+			'light-blue',
+			'cyan',
+			'teal',
+			'green',
+			'light-green',
+			'lime',
+			'yellow',
+			'amber',
+			'orange',
+			'deep-orange',
+			'brown'
+		]
+		
+		if(cardColor) {
+			cardColor = cardColor || 6;
+			cardColor = colors[cardColor];
+			var color = 'md-tile--'+cardColor;
+		}
+		
+%>	<article class="md-tile <%= largeOrSmall %> <%= color %> md-ripple__effect">
+			<a href="<%- url_for((post.link?post.link:post.path)) %>" class="md-touch-target"></a>
+			<h2 class="md-tile__title"><%= post.title %></h2>     
+			<span class="md-tile__date"><time datetime="<%= date_xml(post.date) %>" itemprop="datePublished"><%- date(post.date, 'MMM DD YYYY') %></time></span>
+<%		
+			var excerpt;			
+			if(post.excerpt) {
+				//excerpt = post.excerpt.replace(/\<[^\>]+\>/g, "");					
+				excerpt = post.excerpt;					
+			} else if(post.content){
+				//excerpt = post.content.replace(/\<[^\>]+\>/g, "").substring(0,200);
+				excerpt = post.content;
+			} 
+			
+			if(excerpt != null) {
+%>			<div class="md-tile__excerpt"><%- excerpt %></div>
+<%		}
+
+			if(post.tags.length > 0){
+%>			<div class="md-tile__tags">
+<%			for(var i = 0; i < post.tags.data.length; i++) {
+%>				<a href="<%- url_for(post.tags.data[i].path)%>" class="md-tile__tag">
+						<i class="material-icons">lens</i> 
+						<%= post.tags.data[i].name %>
+					</a>
+<%			}
+%>			</div>
+<%		}
+%>	</article>
+<%} else {
+		var floatArticle = '';
+		if(is_post()) {
+			floatArticle = 'md-post--float'
+		}
+		
+		var spaceArticle = '';
+		if(is_home()) {
+			spaceArticle = 'md-post--space'
+		}
+%>
+		<article class="md-post--expand <%- floatArticle %> <%- spaceArticle %>">	
+			<div class="md-post__details">
+<%			if (is_post()) {
+%>				<div class="md-flex--row md-flex--align md-post__title">
+						<h2>
+							<%= post.title %>
+							<a href="<%- url_for(post.path) %>" class="md-touch-target"></a>
+						</h2>
+						<!-- social media sharing is currently not supported yet -->
+						<!--<i class="material-icons">share</i>-->
+					</div>
+					<span class="md-post__time"><time datetime="<%= date_xml(post.date) %>" itemprop="datePublished"><%- date(post.date, 'MMM DD YYYY') %></time></span>
+<%			}
+		
+				if(!post.content){
+%>				<div class="md-post--empty"></div>
+<%			}
+%>		
+				<div class="md-post__content">
+					<%- post.content %>
+				</div>
+			</div>
+<%		
+			if (is_post()) {
+%>			<div class="md-divider"></div>
+				
+				<footer class="md-post__footer">
+					<div class="md-post__footer-pic"></div>
+					<div class="md-flex--column">
+						<span class="md-post__footer-label">Written by</span>
+						<span class="md-post__footer-author"><%- theme.author %></span>
+						<div class="md-post__footer-social-media">
+							<a href="#"><i class="fa fa-facebook"></i></a>
+							<a href="#"><i class="fa fa-twitter"></i></a>
+						</div>
+					</div>
+<%			
+					if(!is_home()) {
+						if (post.prev || post.next) {
+%>						<div class="md-post__footer-more-articles">
+								<div class="md-post__footer-more-articles--prev">
+<%								if(post.prev) {
+%>									<a href="<%- url_for(post.prev.path) %>" class="md-touch-target"></a>
+										<i class="material-icons">navigate_before</i>
+										<span class="md-post__footer-more-title"><span>Previous:</span> <%- post.prev.title%></span>
+<%								}
+%>							</div>
+								<div class="md-post__footer-more-articles--next">
+<%								if(post.next) {
+%>									<a href="<%- url_for(post.next.path) %>" class="md-touch-target"></a>
+										<span class="md-post__footer-more-title"><span>Next:</span> <%- post.next.title%></span>
+										<i class="material-icons">navigate_next</i>
+<%								}
+%>							</div>
+							</div>
+<%					}
+					}
+%>			</footer>
+<%		}
+%>	</article>
+<%}
+%>

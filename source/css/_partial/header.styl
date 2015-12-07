@@ -1,0 +1,223 @@
+.md-header 
+	width: 100%
+	box-sizing: border-box
+	background: primary-color
+	min-height: 150px
+
+.md-header--full
+	background: primary-color
+	height: 100vh
+	
+.md-header--half
+	height: 50vh
+
+.md-header__wrapper 
+	height: 100%
+	max-width: max-width
+	margin: 0 auto
+	box-sizing: border-box
+	display: flex
+	flex-direction: column
+	padding: spacing*2 0
+
+.md-header__toolbar 
+	display: flex
+	flex-direction: row
+	align-items: center
+	padding: 0 spacing
+	box-sizing: border-box
+	background-color: primary-color
+
+.md-header__toolbar--fixed 
+	position: fixed
+	left: 0
+	z-index: 999
+	width: 100%
+	padding: spacing spacing*2
+
+.md-header__toolbar--hide
+	top: -82px
+	transition: 0.5s ease-in-out
+	
+.md-header__toolbar--show
+	top: 0
+	transition: 0.5s ease-in-out
+
+.md-header__toolbar--elevate
+	box-shadow: elevate-1
+
+.md-header__toolbar-spacer
+	height: 56px
+	width: 100%
+
+.md-header__toolbar-spacer--hide
+	display: none
+	
+.md-header__toolbar-spacer--show
+	display: block
+	
+.md-header__logo 
+	flex-grow: 1
+	display: flex
+	align-items: center
+	justify-content: center
+	min-width: 40px
+	height: 40px
+	width: 40px
+	background:url(logo-img) no-repeat center center
+	background-size: 40px 40px
+	position: relative
+	margin-right: spacing
+	
+	a
+		text-decoration: none
+		color: white-text
+		font-size: 20px
+	
+
+.md-header__search-bar 
+	flex-grow: 2
+	background-color: light-primary-color
+	border-radius: 3px
+	
+	> .search-form
+		height: 40px
+		padding: spacing spacing*2
+		display: flex
+		align-items: center
+		overflow: hidden
+		box-sizing: border-box
+		&:before
+			content: "\f002"
+			margin-right: 8px
+			color: color-nav-foreground
+			font: normal normal normal 16px/1 FontAwesome
+		
+		> .search-form-input,
+		> .search-form-input.st-ui-search-input,
+		> .search-form-input.st-default-search-input
+			-webkit-appearance: textarea
+			padding: 0
+			width: 100px
+			height: auto !important
+			border: none !important
+			outline: none !important
+			background: none !important
+			line-height: line-height
+			transition: 0.2s ease-in
+			font: 16px font-sans
+			color: color-nav-foreground
+			&:focus
+				width: 150px
+			&::-webkit-search-results-decoration
+			&::-webkit-search-cancel-button
+				-webkit-appearance: none
+		input 
+			flex-grow: 1
+			&::-webkit-input-placeholder
+				color: rgba(255,255,255,0.7)
+			&:-moz-placeholder
+				color: rgba(255,255,255,0.7)
+			&::-moz-placeholder
+				color: rgba(255,255,255,0.7)
+			&:-ms-input-placeholder
+				color: rgba(255,255,255,0.7)
+		.search-form-submit
+			display: none
+		
+.md-header__menu-button-wrapper
+	display: flex
+	align-items: center
+	justify-content: center
+	flex-grow: 1
+	margin-left: spacing
+	
+#md-header__menu-button 
+	background-color: initial
+	border: none 
+	cursor: pointer
+	
+	i 
+		color: white-text
+		font-size: 24px
+		
+	&:focus 
+		outline: none
+		
+	@media (min-width: breakpoint-landscape-phablet)
+		display: none
+
+#md-header__navigations
+	position: fixed
+	width: 300px
+	height: 100%
+	right: -300px
+	background-color: white-text
+	box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12)
+	flex-direction: column
+	list-style-type: none;
+  
+	display: flex
+	top: 0
+	z-index: 999
+	overflow-y: auto
+	will-change: left, right
+	
+	li 
+		padding: spacing*2 spacing*2
+		a 
+			text-decoration: none
+			color: primary-text
+			font-size: 18px
+			font-weight: 400
+	
+	@media (min-width: breakpoint-landscape-phablet)
+		position: initial
+		width: initial
+		height: initial
+		right: initial !important
+		background-color: transparent
+		box-shadow: none
+		flex-direction: row
+		
+		li
+			padding: spacing
+			margin: spacing
+			a 
+				color: white-text
+				&:hover
+					border-bottom: 2px solid white-text
+
+.md-header__details
+	display: flex
+	flex-direction: column
+	align-items: center
+	justify-content: center
+	flex-grow: 2
+
+.md-header__title--hide,
+.md-header__subtitle--hide
+	display: none !important
+	
+.md-header__title
+	display: flex
+	justify-content: center
+	font-size: 8vmin
+	margin-top: spacing*3
+	color: white-text  
+
+.md-header__subtitle
+	display: flex
+	justify-content: center
+	font-size: 6vmin
+	color: white-text
+
+#md-header__overlay 
+	position: fixed
+	top: 0
+	left: 0
+	right: 0
+	height: 120vh
+	background-color: rgba(0,0,0,.5)
+	z-index: 997
+	will-change: opacity

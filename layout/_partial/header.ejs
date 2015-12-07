@@ -1,0 +1,75 @@
+<%
+	var title = page.title,
+			isHeaderFull = theme.isFull ? 'md-header--full':'md-header--half',
+			hideTitle = false,
+			hideSubtitle = true
+
+	if(is_home()) {
+		title = config.title;
+		hideSubtitle = false;
+	}else{
+		headerClass = 'md-header--half';
+	}
+	
+	if(is_tag()) {
+		title = 'tags: ';
+		
+		if (page.tag){
+			title += page.tag;
+		}
+	}
+	
+	if(is_archive()) {
+		title = 'archives';
+		
+		if (page.year){
+	    title += ': ' + page.year;
+	  }
+	  
+		if (page.month){
+	    title +=  '/' + page.month;
+	  } 
+	}
+	
+	if(is_post()) {
+		hideTitle = true
+	}
+	
+	hideTitle = hideTitle ? 'md-header__title--hide':'';
+	hideSubtitle = hideSubtitle ? 'md-header__subtitle--hide':'';
+%>
+<header class="md-header <%= isHeaderFull %>">
+  <div class="md-header__wrapper">
+		<div class="md-header__toolbar">
+			<h1 class="md-header__logo">
+				<a class="md-touch-target" href="<%- url_for() %>"></a>
+			</h1>
+			<div class="md-header__search-bar">
+				<%- search_form({text: __('index.search')}) %>
+			</div>
+			<div class="md-header__menu-button-wrapper">
+				<button id="md-header__menu-button">
+					<i class="fa fa-bars"></i>
+				</button> 
+				<ul id="md-header__navigations">
+<%				for (var i in theme.navigations){
+						if(i == 'Categories'){ 
+%>						<%- list_categories({show_count: false, depth: 2, class: 'main-nav', style: 'list'}) %>
+<% 					} else { 
+%>						<li><a href="<%- url_for(theme.navigations[i]) %>"><%= __('index.' + i.toLowerCase()) %></a></li>
+<%					}
+					} 
+%>			</ul>
+			</div>
+		</div>
+		<div class="md-header__toolbar-spacer md-header__toolbar-spacer--hide"></div>
+		<div class="md-header__details">
+			<h1 class="md-header__title <%= hideTitle %>"><% if (title) { %><%= title %><% } %></h1>
+<% 			if (theme.subtitle){ 
+%>				<h2 class="md-header__subtitle <%= hideSubtitle %>">
+						<p class="subtitle"><%= theme.subtitle %></p>
+					</h2>
+<% 			} 
+%>	</div>
+	</div>
+</header>

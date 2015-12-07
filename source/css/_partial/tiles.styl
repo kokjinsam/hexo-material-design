@@ -1,0 +1,561 @@
+/* -- Ripple-effect ----------------------------------- */
+.md-ripple__effect
+  position: relative
+  overflow: hidden
+  transform: translatez(0)
+
+.md-ripple__ink 
+  display: block
+  position: absolute
+  pointer-events: none
+  border-radius: 50%
+  transform: scale(0)
+
+.md-ripple__ink 
+  background: #fff
+  opacity: 1
+
+.md-ripple__ink.animate 
+  animation: ripple-effect 0.5s linear
+
+$keyframe-ripple = ripple-effect
+@keyframes {$keyframe-ripple}
+  100% 
+    opacity: 0;
+    -webkit-transform: scale(2.5);
+    -ms-transform: scale(2.5);
+    -o-transform: scale(2.5);
+    transform: scale(2.5);
+
+/* -- Board --------------------------------------- */
+.md-board 
+  position: relative
+  display: flex
+  flex-direction: row
+  flex-wrap: wrap
+
+.md-board > * 
+  margin: 4px
+  display: flex
+  flex-direction: column
+
+
+/* -- Tiles ------------------------------------------- */
+.md-board .md-tile 
+  color: #ffffff
+	flex-grow: 1
+  position: relative
+  overflow: hidden
+  cursor: pointer
+  outline: 0
+  border: 0
+  border-radius: 0
+  transition: all 0.15s ease-in-out
+
+.md-board .md-tile:hover,
+.md-board .md-tile:active,
+.md-board .md-tile.active,
+.md-board .md-tile:focus,
+.md-board .md-tile:active:focus,
+.md-board .md-tile.active:focus 
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23)
+
+/* -- Tiles content ----------------------------------- */
+.md-board .md-tile .md-tile__image 
+  position: absolute
+  display: block
+  width: 100%
+  background-repeat: no-repeat
+  background-position: center center
+  background-size: contain
+
+
+.md-board .md-tile .md-tile__image.md-tile__image--cover 
+  background-position: left top
+  -webkit-background-size: cover
+  -moz-background-size: cover
+  -o-background-size: cover
+  background-size: cover
+  top: 0
+  bottom: 0
+  z-index: -1
+  opacity: 0.3
+
+.md-board .md-tile .md-tile__title 
+	font-size: 24px
+	padding: 56px 16px 0 16px
+	margin: 0
+
+.md-board .md-tile .md-tile__date 
+	font-size: 16px
+	padding: 4px 16px 16px 16px
+	margin: 0
+
+.md-board .md-tile .md-tile__excerpt 
+	padding: 16px 16px 24px 16px
+	margin: 0 0 16px 0
+	height: 10em
+	position: relative
+	overflow: hidden
+	box-sizing: border-box
+	font-size: 18px
+	line-height: 26px
+
+.md-board .md-tile .md-tile__tags 
+	display: flex
+	flex-direction: row
+	flex-wrap: wrap
+	padding: spacing*2 spacing*2 spacing*4 spacing*2
+	
+	> .md-tile__tag
+		margin-left: (spacing/2)
+		margin-right: (spacing/2)
+		margin-top: (spacing/2)
+		padding: (spacing/2) spacing
+		background-color: light-primary-color
+		border-radius: 3px
+		display: flex
+		flex-direction: row
+		align-items: center
+		z-index: 2
+		text-decoration: none
+		color: white-text
+		
+		// targeting potrait iphone 4 - 6+
+		font-size: 14px
+		
+		i
+			font-size: 7px
+			margin-right: spacing
+		
+		// targeting landscape iphone 5 - 6+
+		@media (min-width: 500px) && (min-height: 320px)
+			font-size: 14px
+			i
+				font-size: 7px
+
+*/
+/*-- Tiles size --------------------------------------- */
+.md-board .md-tile--large,
+.md-board .md-tile--small 
+	width: calc(100% - 10px)
+	min-height: 270px
+
+
+@media (min-width: 627px) 
+	.md-board .md-tile--large,
+	.md-board .md-tile--small 
+		width: calc(50% - 10px)
+
+@media (min-width: 950px) 
+	.md-board .md-tile--large 
+		width: calc(50% - 10px)
+	
+	.md-board .md-tile--small
+		width: calc(25% - 10px)
+
+/*-- Display animation -------------------------------- */
+.display-animation > * 
+  transform: scale(0)
+
+.display-animation > .animated 
+  animation: display 0.5s cubic-bezier(0.55, 0, 0.1, 1) forwards
+
+.no-js .display-animation > * 
+  transform: scale(1)
+
+/* -- Tiles color ------------------------------------- */
+/* -- red ------------------------------------- */
+.md-tile--red 
+	background-color: #e84e40
+	
+	&:hover
+	&:active
+	&.active 
+		background-color: #dd191d
+
+	&:focus 
+		background-color: #d01716
+
+	&:disabled
+	> .disabled
+	&[disabled] 
+		background-color: #b3b3b3
+
+	> .md-ripple__ink 
+		background-color: #c41411
+
+/* -- pink ------------------------------------- */
+.md-tile--pink 
+	background-color: #ec407a
+
+	&:hover
+	&:active
+	&.active 
+		background-color: #d81b60
+
+	&:focus 
+		background-color: #c2185b
+
+	&:disabled
+	> .disabled
+	&[disabled] 
+		background-color: #b3b3b3
+
+	> .md-ripple__ink 
+		background-color: #ad1457	
+
+/* -- purple ------------------------------------- */
+.md-tile--purple 
+	background-color: #ab47bc
+
+	&:hover
+	&:active
+	&.active 
+		background-color: #8e24aa
+
+	&:focus 
+		background-color: #7b1fa2
+
+	&:disabled
+	> .disabled
+	&[disabled] 
+		background-color: #b3b3b3
+
+.md-tile--purple .md-ripple__ink 
+	background-color: #6a1b9a	
+
+/* -- deep purple ------------------------------------- */
+.md-tile--deep-purple
+	background-color: #7e57c2
+
+	&:hover
+	&:active
+	&.active 
+		background-color: #5e35b1
+
+	&:focus 
+		background-color: #512da8
+
+	&:disabled
+	> .disabled
+	&[disabled] 
+		background-color: #b3b3b3
+
+	> .md-ripple__ink 
+		background-color: #4527a0
+
+/* -- indigo ------------------------------------- */
+.md-tile--indigo
+	background-color: #5c6bc0
+
+	&:hover
+	&:active
+	&.active 
+		background-color: #3949ab
+
+	&:focus 
+		background-color: #303f9f
+
+	&:disabled
+	> .disabled
+	&[disabled] 
+		background-color: #b3b3b3
+
+	> .md-ripple__ink 
+		background-color: #283593
+
+/* -- blue ------------------------------------- */
+.md-tile--blue
+	background-color: #738ffe
+
+	&:hover
+	&:active
+	&.active 
+		background-color: #4e6cef
+
+	&:focus 
+		background-color: #455ede
+
+	&:disabled
+	> .disabled
+	&[disabled] 
+		background-color: #b3b3b3
+
+	> .md-ripple__ink 
+		background-color: #3b50ce
+
+/* -- light blue ------------------------------------- */
+.md-tile--light-blue {
+  background-color: #29b6f6;
+}
+.md-tile--light-blue:hover,
+.md-tile--light-blue:active,
+.md-tile--light-blue.active {
+  background-color: #039be5;
+}
+.md-tile--light-blue:focus {
+  background-color: #0288d1;
+}
+.md-tile--light-blue:disabled,
+.md-tile--light-blue.disabled,
+.md-tile--light-blue[disabled] {
+  background-color: #b3b3b3;
+}
+.md-tile--light-blue .md-ripple__ink {
+  background-color: #0277bd;
+}
+
+/* -- cyan ------------------------------------- */
+.md-tile--cyan {
+  background-color: #26c6da;
+}
+.md-tile--cyan:hover,
+.md-tile--cyan:active,
+.md-tile--cyan.active {
+  background-color: #00acc1;
+}
+.md-tile--cyan:focus {
+  background-color: #0097a7;
+}
+.md-tile--cyan:disabled,
+.md-tile--cyan.disabled,
+.md-tile--cyan[disabled] {
+  background-color: #b3b3b3;
+}
+.md-tile--cyan .md-ripple__ink {
+  background-color: #00838f;
+}
+
+/* -- teal ------------------------------------- */
+.md-tile--teal {
+  background-color: #26a69a;
+}
+.md-tile--teal:hover,
+.md-tile--teal:active,
+.md-tile--teal.active {
+  background-color: #00897b;
+}
+.md-tile--teal:focus {
+  background-color: #00796b;
+}
+.md-tile--teal:disabled,
+.md-tile--teal.disabled,
+.md-tile--teal[disabled] {
+  background-color: #b3b3b3;
+}
+.md-tile--teal .md-ripple__ink {
+  background-color: #00695c;
+}
+
+/* -- green ------------------------------------- */
+.md-tile--green {
+  background-color: #2baf2b;
+}
+.md-tile--green:hover,
+.md-tile--green:active,
+.md-tile--green.active {
+  background-color: #0a8f08;
+}
+.md-tile--green:focus {
+  background-color: #0a7e07;
+}
+.md-tile--green:disabled,
+.md-tile--green.disabled,
+.md-tile--green[disabled] {
+  background-color: #b3b3b3;
+}
+.md-tile--green .md-ripple__ink {
+  background-color: #0a7e07;
+}
+
+/* -- light green ------------------------------------- */
+.md-tile--light-green
+	background-color: #9ccc65
+	color: #212121 !important
+	
+	&:hover
+	&:active
+	&.active 
+		background-color: #7cb342
+
+	&:focus 
+		background-color:  #689f38
+
+	&:disabled
+	> .disabled
+	&[disabled] 
+		background-color: #b3b3b3
+
+	> .md-ripple__ink 
+		background-color: #558b2f
+	
+/* -- lime ------------------------------------- */
+.md-tile--lime {
+  background-color: #d4e157;
+}
+.md-tile--lime:hover,
+.md-tile--lime:active,
+.md-tile--lime.active {
+  background-color: #c0ca33;
+}
+.md-tile--lime:focus {
+  background-color: #afb42b;
+}
+.md-tile--lime:disabled,
+.md-tile--lime.disabled,
+.md-tile--lime[disabled] {
+  background-color: #b3b3b3;
+}
+.md-tile--lime .md-ripple__ink {
+  background-color: #9e9d24;
+}
+
+/* -- yellow ------------------------------------- */
+.md-tile--yellow
+	background-color: #ffee58
+	color: #212121 !important
+	
+	&:hover
+	&:active
+	&.active 
+		background-color: #fdd835
+
+	&:focus 
+		background-color: #fbc02d
+
+	&:disabled
+	> .disabled
+	&[disabled] 
+		background-color: #b3b3b3
+
+	> .md-ripple__ink 
+		background-color: #f9a825
+	
+
+/* -- amber ------------------------------------- */
+.md-tile--amber
+	background-color: #ffca28
+	color: #212121 !important
+	
+	&:hover
+	&:active
+	&.active 
+		background-color: #ffb300
+
+	&:focus 
+		background-color:  #ffa000
+
+	&:disabled
+	> .disabled
+	&[disabled] 
+		background-color: #b3b3b3
+
+	> .md-ripple__ink 
+		background-color: #ff8f00
+	
+/* -- orange ------------------------------------- */
+.md-tile--orange {
+  background-color: #ffa726;
+}
+.md-tile--orange:hover,
+.md-tile--orange:active,
+.md-tile--orange.active {
+  background-color: #fb8c00;
+}
+.md-tile--orange:focus {
+  background-color: #f57c00;
+}
+.md-tile--orange:disabled,
+.md-tile--orange.disabled,
+.md-tile--orange[disabled] {
+  background-color: #b3b3b3;
+}
+.md-tile--orange .md-ripple__ink {
+  background-color: #ef6c00;
+}
+
+/* -- deep orange ------------------------------------- */
+.md-tile--deep-orange {
+  background-color: #ff7043;
+}
+.md-tile--deep-orange:hover,
+.md-tile--deep-orange:active,
+.md-tile--deep-orange.active {
+  background-color: #f4511e;
+}
+.md-tile--deep-orange:focus {
+  background-color: #e64a19;
+}
+.md-tile--deep-orange:disabled,
+.md-tile--deep-orange.disabled,
+.md-tile--deep-orange[disabled] {
+  background-color: #b3b3b3;
+}
+.md-tile--deep-orange .md-ripple__ink {
+  background-color: #d84315;
+}
+
+/* -- brown ------------------------------------------ */
+.md-tile--brown {
+  background-color: #8d6e63;
+}
+.md-tile--brown:hover,
+.md-tile--brown:active,
+.md-tile--brown.active {
+  background-color: #6d4c41;
+}
+.md-tile--brown:focus {
+  background-color: #5d4037;
+}
+.md-tile--brown:disabled,
+.md-tile--brown.disabled,
+.md-tile--brown[disabled] {
+  background-color: #b3b3b3;
+}
+.md-tile--brown .md-ripple__ink {
+  background-color: #4e342e;
+}
+
+/* -- animation keyframes --------------------*/
+@keyframes display {
+  from {
+    -webkit-transform: scale(0);
+  }
+  to {
+    -webkit-transform: scale(1);
+  }
+}
+@-o-keyframes display {
+  from {
+    -webkit-transform: scale(0);
+  }
+  to {
+    -webkit-transform: scale(1);
+  }
+}
+@-ms-keyframes display {
+  from {
+    -webkit-transform: scale(0);
+  }
+  to {
+    -webkit-transform: scale(1);
+  }
+}
+@-moz-keyframes display {
+  from {
+    -webkit-transform: scale(0);
+  }
+  to {
+    -webkit-transform: scale(1);
+  }
+}
+@-webkit-keyframes display {
+  from {
+    -webkit-transform: scale(0);
+  }
+  to {
+    -webkit-transform: scale(1);
+  }
+}
+
